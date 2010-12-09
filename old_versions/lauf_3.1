@@ -1,0 +1,107 @@
+#!/bin/sh
+########################################################
+# Lauf v0.3.0                                          #
+# (c) 2010 joshua.redfield(AT)gmail.com                #
+# Dependencies: Coreutils, Zenity, Notify-OSD          #
+########################################################
+########################################################
+# Get working directories and set up global variables  #
+# These are used for plugins, and for lauf as well.    #
+########################################################
+lauf_app_dir=$(dirname $0)
+lauf_plugin_dir="${lauf_app_dir}/plugins"
+lauf_core_dir="${lauf_app_dir}/core"
+lauf_app_icon="${lauf_app_dir}/icons/lauf.png"
+lauf_version="0.3.1"
+lauf_app_name="Lauf v${lauf_version}"
+lauf_width="400"
+lauf_height="400"
+_master=$(whoami)
+########################################################
+#                 Begin Actual Code                    #
+########################################################
+lauf_exec=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="What do you need ${_master}?\nNote: type help if you need it")
+########################################################
+# This case statement simple checks if the cancel      #
+# button, or the okay button has been pressed.         #
+# 0 = okay, 1 = cancel                                 #
+########################################################
+case $? in
+    0)
+########################################################
+# Check to see if anything was entered into the text   #
+# box. Then split words into arguements                #
+# $0 = Command, Or plugin name                         #
+# $1 = Arguement 1                                     #
+# $2 = Arguement 2                                     #
+# ECT ...                                              #
+########################################################
+        if [ -n "${lauf_exec}" ]; then
+        lauf_exec=$(echo ${lauf_exec} | tr '[A-Z]' '[a-z]') #Convert uppercase to lowercase
+        ################### 
+        OLDIFS=$IFS       # Since posix compliant shells don't
+        IFS=" "           # support arrays, We'll have to use this
+        set -- $lauf_exec # hackish technique. If anyone has a better way
+        IFS=$OLDIFS       # let me know. joshua.redfield(AT)gmail.com
+        ###################
+        exec_command=$@
+########################################################
+# Check to see if "~" was entered as a command. If it  #
+# was, execute the last known command / plugin entered #
+########################################################
+        if [ $1 = "~" ]; then
+            _last_command=$(cat "${lauf_app_dir}/.last_command")
+            if [ -f "${lauf_core_dir}/$_last_command.sh" ]; then
+                . "${lauf_core_dir}/$_last_command.sh"
+            elif [ -x "${lauf_plugin_dir}/$_last_command.sh" ]; then
+                . "${lauf_plugin_dir}/$_last_command.sh"
+            elif type "${_last_command}"; then
+                exec "${_last_command}"
+            else
+                exec $0
+            fi
+        fi
+########################################################
+# Run command with terminal output if command is       #
+# executed useing $                                    #
+########################################################
+        if [ $1 = "$" ]; then
+            _output=${@#"$"}
+            $_output | zenity --width=${lauf_width} --height=$(($lauf_height-200)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text="" --column "${2}'s output:"
+            exit
+        fi
+########################################################
+# If command begins with #! execute bash style syntax  #
+########################################################
+        if [ $1 = "#!" ]; then
+            _bash=${@#"#!"}
+            bash -c "$_bash"
+            exit
+        fi
+########################################################
+# Check to see if what was entered is a core plugin,   #
+# or if it's just a normal plugin, or if it's just a   #
+# system wide command                                  #
+########################################################
+            if [ -f "${lauf_core_dir}/$1.sh" ]; then
+                echo $1 > "${lauf_app_dir}/.last_command"
+                . "${lauf_core_dir}/$1.sh" #Execute a core plugin
+            elif [ -x "${lauf_plugin_dir}/$1.sh" ]; then
+                echo $1 > "${lauf_app_dir}/.last_command"
+                . "${lauf_plugin_dir}/$1.sh" #Execute a external plugin
+            elif type "$@" >/dev/null; then #Exist?
+                notify-send --icon="${lauf_app_icon}" "${lauf_app_name} - Running" "${exec_command}"
+                echo $1 > "${lauf_app_dir}/.last_command"
+                exec $@
+            else
+                exec $0
+            fi
+        fi
+    ;;
+#######################################################
+# Cancel button was pressed, exit program.            #
+#######################################################
+    1)
+    exit
+    ;;
+esac

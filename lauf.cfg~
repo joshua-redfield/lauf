@@ -1,0 +1,15 @@
+# Default application width
+# This may not change various external plugin dementions
+lauf_width="400"
+# Default application height
+# This may not change various external plugin dementions
+lauf_height="400"
+# Style of notification
+# Style: notify-osd, message, none
+lauf_notify_style="notify-osd"
+# When to close notification
+# Seconds not milaseconds
+lauf_notify_timeout="10"
+# When to close window for activity
+# 0 = keep open, Seconds not milaseconds
+lauf_app_timeout="0"

@@ -1,0 +1,11 @@
+To do for Lauf v 0.5.0
+Plugin: Compress
+Plugin: Volume
+Core Plugin: Backup
+Core Plugin: Calendar
+Core Plugin: Logoff
+Core Plugin: Restart
+Core Plugin: Shutdown
+Internal: Run application for <time>
+Config: Tips on/off
+
