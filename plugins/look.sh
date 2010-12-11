@@ -11,7 +11,7 @@
 # Functions #
 #############
 _find() {
-        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}" -i "${lauf_app_icon}"
+        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}..." -i "${lauf_app_icon}"
         find . -name "*${search}*" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy" --column "Results for $search"
         if [ $? = "0" ]; then
             return
