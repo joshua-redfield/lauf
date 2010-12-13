@@ -29,6 +29,8 @@ weather () {
 }
 ########################################################
 # Arguements for skipping GUI                          #
+# look in <dir> for <file>                             #
+# look for <file>                                      #
 ########################################################
 if [ ! $lauf_exec2 = "" ]; then
     weather_zipcode=$lauf_exec2
