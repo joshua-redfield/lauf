@@ -10,7 +10,7 @@
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="0.4.1" #Application Version
+readonly lauf_version="0.4.2" #Application Version
 readonly lauf_app_name="Lauf v${lauf_version}" #Application Name
 readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
