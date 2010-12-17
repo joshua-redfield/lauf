@@ -10,7 +10,7 @@
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="0.4.3" #Application Version
+readonly lauf_version="0.4.4" #Application Version
 readonly lauf_app_name="Lauf v${lauf_version}" #Application Name
 readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
@@ -40,8 +40,6 @@ if [ $lauf_notify_style = "notify-osd" ]; then #Use notify-send
     notify-send --icon="${lauf_app_icon}" "$1" "$2" --expire-time=$_timeout
 elif [ $lauf_notify_style = "message" ]; then #Use Zenity messagebox
     zenity $lauf_app_options --title="$1" --text="$2" --info
-elif [ $lauf_notify_style = "none" ]; then #Simply output to terminal
-    echo "$lauf_app_dir: $1 - $2"
 else #Else default to notify-send
     _timeout=$(($lauf_notify_timeout*60)) #Convert seconds to milaseconds
     notify-send --icon="${lauf_app_icon}" "$1" "$2" --expire-time=$_timeout
