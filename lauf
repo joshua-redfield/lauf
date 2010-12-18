@@ -51,7 +51,6 @@ fi
 case $1 in
 "-p" | "--plugin")
     yarra "lauf_exec" "$2 $3 $4 $5 $6 $7 $8 $9 $10" #9 total arguements from commandline
-    lauf_notify_style="none" #Force terminal output
     if [ -f "${lauf_core_dir}/$lauf_exec1.sh" ]; then #Check if users input was a core plugin
         . "${lauf_core_dir}/$lauf_exec1.sh" #Execute a core plugin
     else [ -x "${lauf_plugin_dir}/$lauf_exec1.sh" ] #Check if users input was plugin
@@ -60,7 +59,6 @@ case $1 in
     exit
 ;;
 "-d" | "--debug")
-	lauf_notify_style="none" #Force terminal output
     echo "Starting in Debug Mode"
     echo "-------------------"
     sh -xv $0 #Run sh in debug and verbose mode
