@@ -1,6 +1,6 @@
 #!/bin/sh
 ########################################################
-# Lauf v0.4.1                                          #
+# Lauf v0.4.4                                          #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
 # (c) 2010 hunterm.haxxr(AT)gmail.com                  #
 # Dependencies: Coreutils, Zenity, Notify-OSD          #

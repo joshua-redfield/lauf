@@ -12,13 +12,13 @@ Table of Contents
 4. License
 
 1.) About
-What is Lauf? Well for one it's the german word for "Run". Also to answer your next question, No. I am NOT german. Lauf is a lightweight application and task launcher that's completely programmed in the simple SHELL scripting language. Lauf is made to run under the Dash interpreter but has no problem running on Bash. Lauf is the arch-nemesis of the project Alawalk(http://alawalk.tk).
+What is Lauf? Well for one it's the german word for "Run". Also to answer your next question, No. I am NOT german. Lauf is a lightweight application and task launcher that's completely programmed in the simple SHELL scripting language. Lauf is made to run under the Dash interpreter but has no problem running on Bash.
 
 1a. Dependencies
 The following must be installed in order for Lauf to work properly:
 a. Zenity
 b. Notify-OSD
-   This is optional, as long as you change the lauf_notify_style from "notify-osd" to "message" or "none"
+   This is optional, as long as you change the lauf_notify_style from "notify-osd" or "message".
    By default, notify-osd will be used.
 c. Coreutils
 ** Plugin dependencies are not listed, When activating an external plugin, It's dependencies will be shown. **
