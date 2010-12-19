@@ -1,17 +1,18 @@
 ########################################################
 # Lauf.About                                           #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
+# (c) 2010 hunterm.haxxr(AT)gmail.com                  #
 ########################################################
 plugins=$(ls $lauf_plugin_dir) #get $lauf_plugin_dir contents
 core=$(ls $lauf_core_dir) #get $lauf_core_dir contents
 #Count total plugins in plugin folder
-plugin_count=0
+plugin_count=
 for amount in $plugins
 do
 plugin_count=$(($plugin_count+1))
 done
 #Count total core plugins in core folder
-core_count=0
+core_count=
 for amount in $core
 do
 core_count=$(($core_count+1))
@@ -36,7 +37,8 @@ done
 message="$lauf_app_name
 ${lauf_app_motto}
 (c) 2010 Joshua Redfield
-http://code.google.com/p/lauf\n
+(c) 2010 Hunterm
+https://github.com/joshua-redfield/lauf
 Amount of plugins: $total_plugins
 Total lines of code: $line_count"
 

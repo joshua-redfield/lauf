@@ -1,5 +1,5 @@
 ########################################################
-# Extract v0.2.0                                       #
+# gmail v0.2.0                                         #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
 # Summary:                                             #
 # Check gmail account for new e-mails. #################
@@ -8,18 +8,16 @@
 # Dependencies:                                        #
 # wget #################################################
 ########################################################
-user_name=""
-pass_word=""
-if [ "$user_name" = "" ]; then
-    zenity --error --text="Username has not been set in script"
+if [ "$gmail_username" = "" ]; then
+    zenity --error --text="Username has not been set in lauf.cfg"
     exec $0;
-    elif [ "$pass_word" = "" ]; then
-        zenity --error --text="Password has not been set in script"
+    elif [ "$gmail_password" = "" ]; then
+        zenity --error --text="Password has not been set in lauf.cfg"
         exec $0
 fi
 gmail=$(wget -T 3 -t 1 -q --secure-protocol=TLSv1 \
  --no-check-certificate \
- --user=${user_name} --password=${pass_word} \
+ --user=${gmail_username} --password=${gmail_password} \
  https://mail.google.com/mail/feed/atom -O - \
  | wc -l)
 wait
@@ -30,4 +28,3 @@ else
  notify-send "${lauf_app_name} - Gmail" "You have no unread mail" -i "${lauf_app_icon}"
  return
 fi
-

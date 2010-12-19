@@ -1,6 +1,6 @@
 #!/bin/sh
 ########################################################
-# Lauf v0.4.1                                          #
+# Lauf v0.4.5                                          #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
 # (c) 2010 hunterm.haxxr(AT)gmail.com                  #
 # Dependencies: Coreutils, Zenity, Notify-OSD          #
@@ -10,9 +10,9 @@
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="0.4.4" #Application Version
+readonly lauf_version="0.4.5" #Application Version
 readonly lauf_app_name="Lauf v${lauf_version}" #Application Name
-readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
+readonly lauf_app_motto="A lightweight application and task launcher - 'wait why does this code work'" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
 readonly lauf_plugin_dir="${lauf_app_dir}/plugins" #Plugin Directory
 . "${lauf_app_dir}/lauf.cfg" #Read user-editable variables
@@ -24,7 +24,7 @@ _master=$USER #Get users username
 yarra () { #yarra "variable_name" "string"
     name=$1
     OLDIFS=$IFS #Keep system IFS
-    IFS=" " #Assing new IFS
+    IFS=" " #Assign new IFS
     set -- "$2" #yarra "name" "$2"
     IFS=$OLDIFS  #Re-assign IFS
     count=0 #Set count to 0
@@ -85,10 +85,9 @@ lauf_exec=$(zenity $lauf_app_options --entry --width=$lauf_width --title="$lauf_
 case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
 0) #Okay
     if [ -n "${lauf_exec}" ]; then #Before doing anything, Make sure the user typed something in
-    lauf_exec=$(echo ${lauf_exec} | tr '[A-Z]' '[a-z]') #Convert uppercase chars to lowercase ones
-                                                        #TODO: This does bug some system-wide commands
-                                                        #with case sensitive arguments using '$'
-    yarra "lauf_exec" "${lauf_exec}" #Split lauf_exec, assign a new var. lauf_exec1=command/plugin, lauf_exec2=arg1, ect
+    lauf_exec_try=$(echo ${lauf_exec}) # try it with just the caps and such it already has
+    lauf_exec=$(echo ${lauf_exec} | tr '[A-Z]' '[a-z]') # convert uppercase chars to lowercase ones
+    yarra "lauf_exec" "${lauf_exec}" #Split lauf_exec, assign a new var. lauf_exec1=command/plugin, lauf_exec2=arg1, etc.
         if [ $lauf_exec1 = "~" ]; then #Check if '~' was entered
             _last_command=$(cat "${lauf_app_dir}/.last_command")
             if [ -f "${lauf_core_dir}/$_last_command.sh" ]; then #Check if '~' was a core plugin
@@ -117,11 +116,16 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
         elif [ -x "${lauf_plugin_dir}/$lauf_exec1.sh" ]; then #Check if users input was plugin
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             . "${lauf_plugin_dir}/$lauf_exec1.sh" #Execute a external plugin
-        elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exist
+        elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exists
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             lauf_notify "Running Application:" "$lauf_exec"
             exec $lauf_exec #Execute command
+        elif type "$lauf_exec_try" >/dev/null; then # yay it worked when i tested it.
+            echo $lauf_exec_try > "${lauf_app_dir}/.last_command" #Last command
+            lauf_notify "Running Application:" "$lauf_exec_try"
+            exec $lauf_exec_try
         else
+
             exec $0  #Re-Execute application
         fi
     fi

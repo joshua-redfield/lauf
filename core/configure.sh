@@ -1,29 +1,25 @@
 ########################################################
-# Lauf.Calc                                            #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
+# Configuration                                        #
+# (c) 2010 hunterm.haxxr@gmail.com                     #
 ########################################################
-########################################################
-# Functions                                            #
-########################################################
-_configure() {
-   calc=$(echo $(($get_math)))
-   lauf_notify "Calculator: [ $calc ]" "Long Answer: $get_math=$calc"
-}
-########################################################
-# Arguements for skipping GUI                          #
-########################################################
-if [ ! $lauf_exec2 = "" ]; then
-   get_math=$lauf_exec2
-   _calc
-   return
-fi
-########################################################
-# GUI Code                                             #
-########################################################
-_configure=$(cat "$lauf_app_dir/lauf.cfg" | zenity $lauf_app_options --width=${lauf_width} --title="${lauf_app_name}" --list --column="Settings" --hide-header --editable --text="")
+zenity ${lauf_app_options} --no-wrap --info --text="`cat "${lauf_app_dir}/lauf.cfg" | grep -v "^$" | grep '#' \
+| sed 's/## /<b>/;s/::/<\/b>/;s/#//g;s/# //;s/SETTINGS/<big>Configuration Help<\/big>/'\
+| grep -v '^$'`\nNow move me to the side of the screen so you can start editing" &
+
+helpcfg=$(cat "${lauf_app_dir}/lauf.cfg" | grep '#')
+cfgtemp=$(mktemp)
+
+cat "${lauf_app_dir}/lauf.cfg" | grep -v '#' | zenity ${lauf_app_options} --width=${lauf_width} --height=${lauf_height} $lauf_app_options --text-info --editable 1>"$cfgtemp"
+
+printf "$helpcfg" >"${lauf_app_dir}/lauf.cfg"
+echo >>"${lauf_app_dir}/lauf.cfg"
+cat "$cfgtemp" >>"${lauf_app_dir}/lauf.cfg"
+echo >>"${lauf_app_dir}/lauf.cfg"
+
+rm -f "$cfgtemp"
+
 case $? in
     0)
-        _calc
         return
         ;;
     1)
