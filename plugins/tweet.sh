@@ -8,8 +8,6 @@
 # Dependencies:                                        #
 # tar, binzip2, rar, gunzip, unzip, uncompress, 7z, xz #
 ########################################################
-tweet_user=""
-tweet_pass=""
 if [ "$tweet_user" = "" ]; then
     zenity --error --text="Username has not been set in script"
     exec $0;

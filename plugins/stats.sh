@@ -5,8 +5,6 @@
 # Shows some basic user and computer information #######
 # Usage:                                               #
 # stats ################################################
-# Dependencies:                                        #
-# Lauf #################################################
 ########################################################
 shawk () {
   cut -d" " -f$1
@@ -29,7 +27,7 @@ notify-send "${lauf_app_name} - Statistics" \
     Username: ${_user}
     Processor: ${_model}
     Total uptime: ${_uptime}
-    Memory: ${_memory_used} / ${_memory_total} 
+    Memory: ${_memory_used} / ${_memory_total}
     Swap: ${_swap_used} / ${_swap_total}" \
     -i "${lauf_app_icon}"
 return

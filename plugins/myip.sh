@@ -6,10 +6,10 @@
 # Usage:                                               #
 # myip #################################################
 # Dependencies:                                        #
-# curl #################################################
+# wget #################################################
 ########################################################
 MyIp=$(wget -qO - http://www.whatismyip.com/automation/n09230945.asp)
-MyLocalIp=$(ip route | sed 's/.*src //' -e 's/ .*//' | head -1)
+MyLocalIp=$(ip route | sed 's/.*src //;s/ .*//' | head -1)
 wait
 notify-send "${lauf_app_name} - MyIp" "Your online IP Address is: ${MyIp}\nYour local IP Address is: ${MyLocalIp}" -i "${lauf_app_icon}"
 return
