@@ -2,6 +2,7 @@
 # Configuration                                        #
 # (c) 2010 hunterm.haxxr@gmail.com                     #
 ########################################################
+<<<<<<< HEAD
 if [ -f "${lauf_app_dir}/lauf.cfg" ];then
     continue #lauf.cfg exists, continue as normal
 else
@@ -60,13 +61,19 @@ sudo_command="gksudo"
 EOF
 fi
 
+=======
+>>>>>>> f96392251c718adb3f72970c271323120f4c3918
 zenity ${lauf_app_options} --no-wrap --info --text="`cat "${lauf_app_dir}/lauf.cfg" | grep -v "^$" | grep '#' \
 | sed 's/## /<b>/;s/::/<\/b>/;s/#//g;s/# //;s/SETTINGS/<big>Configuration Help<\/big>/'\
 | grep -v '^$'`\nNow move me to the side of the screen so you can start editing" &
 
 helpcfg=$(cat "${lauf_app_dir}/lauf.cfg" | grep '#')
+<<<<<<< HEAD
 cfgtemp="/tmp/lauf.$RANDOM" # generate random filename
 > "$cfgtemp" # make the file
+=======
+cfgtemp=$(mktemp)
+>>>>>>> f96392251c718adb3f72970c271323120f4c3918
 
 cat "${lauf_app_dir}/lauf.cfg" | grep -v '#' | zenity ${lauf_app_options} --width=${lauf_width} --height=${lauf_height} $lauf_app_options --text-info --editable 1>"$cfgtemp"
 
