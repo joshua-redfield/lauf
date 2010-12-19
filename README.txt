@@ -45,9 +45,10 @@ f. move
    move <file_name> to <dir>
 g. copy
    copy <file_name> to <dir>
-e. split
+h. split
    split <file_name>
-f. about
+i. about
+j. configure
 
 2b. Built-in plugins
 a. Run command with output:
@@ -59,17 +60,16 @@ c. Run what ever was last entered:
 
 2c. Common Issues
 a. Lauf simply blinks when I type in <blank>
-- Either you made a typo, Your plugin isn't activated, Or that application isn't installed.
+   Either you made a typo, your plugin isn't activated, or that application isn't installed.
 b. Lauf won't run:
--  chmod a+x /dir/to/lauf/lauf
--  Make sure all dependencies are installed
+   Run chmod a+x /dir/to/lauf/lauf
+   Make sure all dependencies are installed
 c. Lauf GUI shows up, but nothing is working?
--  Make sure the core folder exist and has the core plugins in it
--  Make sure you have read and write permissions in the directory you extracted Lauf to
+   Make sure the core folder exist and has the core plugins in it
+   Make sure you have read and write permissions in the directory you extracted Lauf to
 d. Terminal commands with '$' aren't working
--  Make sure the commands arguements aren't case sensitive. If they are, then it's a bug in Lauf. Currently Lauf converts all uppercase characters to lowercase ones. So arguements requiring capital letters are... BURNT.
--  Otherwise, Make sure you didn't make any mistakes with using the commands arguements. 'help with COMMAND'
--  Some commands do not output to the standard output, This can't be helped.
+   Make sure you didn't make any mistakes with using the commands arguements. 'help with COMMAND'
+   Some commands do not output to the standard output, This can't be helped.
 
 2d. Command Line Options
 Running Lauf with no command line options will just execute Lauf normally.
@@ -81,11 +81,14 @@ c. Help with command line options
    -h --help
 
 2e. Configuration
-In the directory you extracted lauf to, there should be a file called "lauf.cfg". It's pretty well commented so I won't be bothering to go into great detail. There's various options and settings that you can change without having to modify the main script.
+There's various options and settings that you can change without having to modify Lauf's program files.
+You can edit the configuration by either running the configure plugin in Lauf by typing 'configure' at
+lauf's box, or by editing the lauf.cfg file directly. It's commented well enough that there should be
+no need to go into detail.
 
 3.) Keyboard Shortcut
 a. Head over to System > Preferences > Keyboard Shortcuts.
-b. Click 'add' and enter 'Lauf' as the name, /dir/you/extracted/to/lauf as it's 'command'
+b. Click 'add' and enter 'Lauf' as the name, /dir/you/extracted/lauf/to/lauf as it's 'command'
 c. Click 'OK'.
 d. Double click on the created keystroke
 e. Press a Keystroke combination to bind Lauf to
@@ -94,6 +97,7 @@ f. Click 'Ok'.
 4.) License
 Lauf - a lightweight application and task launcher
 Copyright (C) 2010 Joshua Redfield
+Copyright (C) 2010 Hunterm
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
