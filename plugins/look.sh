@@ -72,25 +72,10 @@ fi
 search=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="What can I help you find $_master?")
 case $? in
     0)
-        search1=$(echo $search | awk '{ print $1 }')
-        #search1=$(echo $search | cut -d' ' -f1)
-        search2=$(echo $search | awk '{ print $2 }')
-        #search2=$(echo $search | cut -d' ' -f2)
-        search3=$(echo $search | awk '{ print $3 }')
-        #search3=$(echo $search | cut -d' ' -f 3)
-        clear
-        echo s1 $search1
-        echo s2 $search2
-        echo s3 $search3
-        if [ $search1 = "in" ]; then
+        yarra "search" "${search}"
+        if [ $search1 = "program" ];then
             search="$search2"
-            search_dir="$search1"
-            cd "$search2"
-            _find
-            return
-        elif [ $search1 = "program" ];then
-            search="$search3"
-            echo $search3
+            echo $search2
             search_dir="application directories"
             _prog
             return
