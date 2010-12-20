@@ -6,7 +6,7 @@
 # Usage:                                               #
 # look for FILE_NAME, or look in DIRECTORY for FILE_NAME, or look
 # Dependencies:                                        #
-# find #################################################
+# find, grep #################################################
 ########################################################
 # Functions #
 #############
