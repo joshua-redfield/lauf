@@ -2,7 +2,6 @@
 # Configuration                                        #
 # (c) 2010 hunterm.haxxr@gmail.com                     #
 ########################################################
-<<<<<<< HEAD
 if [ -f "${lauf_app_dir}/lauf.cfg" ];then
     continue #lauf.cfg exists, continue as normal
 else
