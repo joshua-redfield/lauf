@@ -21,7 +21,7 @@ _swap_used=`free -m | grep Swap: | awk '{ print $3 }'`
 _kernel=`uname -sr`
 _user=`whoami`
 _model=`cat /proc/cpuinfo |grep -m1 "model name" | cut -d' ' -f3-`
-notify-send "${lauf_app_name} - Statistics" \
+lauf_notify "${lauf_app_name} - Statistics" \
     "Kernel: ${_kernel}
     Host Name: ${_computername}
     Username: ${_user}

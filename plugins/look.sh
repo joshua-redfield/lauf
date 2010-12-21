@@ -12,7 +12,7 @@
 #############
 
 _find() {
-        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}..." -i "${lauf_app_icon}"
+        lauf_notify "${lauf_app_name}" "Looking in ${search_dir} for ${search}..."
         find . -name "*${search}*" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy" --column "Results for $search"
         if [ $? = "0" ]; then
             return
@@ -21,7 +21,7 @@ _find() {
         fi
 }
 _prog() {
-        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}..." -i "${lauf_app_icon}"
+        lauf_notify "${lauf_app_name}" "Looking in ${search_dir} for ${search}..."
         LOOKIN=$(echo $PATH | tr ':' ' ')
         launch=$(find $LOOKIN | grep "${search}" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy.\nYou can also select a program and then press OK to launch it." --column "Results for $search")
         if [ $? = "0" ]; then

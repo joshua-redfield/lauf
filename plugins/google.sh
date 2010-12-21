@@ -16,7 +16,7 @@ default_browser=$(gconftool-2 --get '/desktop/gnome/url-handlers/http/command' |
 google='http://google.com/#q='
 
 _google() {
-   notify-send "${lauf_app_name} - Google" "Searching for: $google_search" -i "${lauf_app_icon}"
+   lauf_notify "${lauf_app_name} - Google" "Searching for: $google_search"
    $default_browser $google"${_search}"
 }
 ########################################################

@@ -22,9 +22,9 @@ gmail=$(wget -T 3 -t 1 -q --secure-protocol=TLSv1 \
  | wc -l)
 wait
 if [ $gmail -gt "8" ]; then
- notify-send "${lauf_app_name} - Gmail" "You have new mail waiting" -i "${lauf_app_icon}"
+ lauf_notify "${lauf_app_name} - Gmail" "You have new mail waiting"
  return
 else
- notify-send "${lauf_app_name} - Gmail" "You have no unread mail" -i "${lauf_app_icon}"
+ lauf_notify "${lauf_app_name} - Gmail" "You have no unread mail"
  return
 fi

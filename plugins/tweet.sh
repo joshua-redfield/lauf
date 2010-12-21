@@ -22,7 +22,7 @@ if [ ! $lauf_exec2 = "" ]; then
     tweet=${@#"tweet "}
     count=$(echo "$tweet" | wc -m)
     [ $count -gt 140 ] && zenity --error $lauf_app_icon --title=${lauf_app_name} --text="Your tweet was $count characters, the maximum is 140 characters!\nYour TWEET was NOT sent!" && return
-    notify-send "${lauf_app_name} - Twitter" "Status changed to: ${tweet}" -i "${lauf_app_icon}"
+    lauf_notify "${lauf_app_name} - Twitter" "Status changed to: ${tweet}"
     curl -u $tweet_user:$tweet_pass -d status="$tweet" http://twitter.com/statuses/update.xml -# -o /dev/null
     return
 fi
@@ -34,7 +34,7 @@ case $? in
     0)
         count=$(echo "$tweet" | wc -m)
         [ $count -gt 140 ] && zenity --error $lauf_app_icon --title=${lauf_app_name} --text="Your tweet was $count characters, the maximum is 140 characters!\nYour TWEET was NOT sent!" && exit
-        notify-send "${lauf_app_name} - Twitter" "Status changed to: ${tweet}" -i "${lauf_app_icon}"
+        lauf_notify "${lauf_app_name} - Twitter" "Status changed to: ${tweet}"
         curl -u $tweet_user:$tweet_pass -d status="$tweet" http://twitter.com/statuses/update.xml -# -o /dev/null
         return;;
     1)

@@ -13,5 +13,5 @@ if [ ! $lauf_exec2 = "" ]; then
    killall $lauf_exec2
    return
 fi
-notify-send "${lauf_app_name} - Close" "Click an application window to kill, to cancel, right click anything" -i "${lauf_app_icon}"
+lauf_notify "Close an application" "Click an application window to kill, to cancel, right click anything"
 exec xkill
