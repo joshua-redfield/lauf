@@ -17,7 +17,7 @@ google='http://google.com/#q='
 
 _google() {
    lauf_notify "${lauf_app_name} - Google" "Searching for: $google_search"
-   $default_browser $google"${_search}"
+   $default_browser $google"${google_search}"
 }
 ########################################################
 # Arguements for skipping GUI                          #
