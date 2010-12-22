@@ -1,7 +1,6 @@
 ########################################################
 # root v0.3.0                                          #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
-# (c) 2010 hunterm.haxxr@gmail.com                     #
+# (c) 2010 joshua.redfield(AT)gmail.com  & hunterm.haxxr@gmail.com                     #
 # Summary:                                             #
 # Run something as root ################################
 # Usage:                                               #

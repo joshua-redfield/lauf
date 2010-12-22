@@ -1,7 +1,6 @@
 ########################################################
 # Close v0.2.0                                         #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
-# (c) 2010 hunterm.haxxr@gmail.com                     #
+# (c) 2010 joshua.redfield(AT)gmail.com &  hunterm.haxxr@gmail.com                     #
 # Summary:                                             #
 # Allows forcing an application window to close ########
 # Usage:                                               #
