@@ -8,20 +8,20 @@
 # plugins - <plugin>                                   #
 ########################################################
 _plugin="${lauf_plugin_dir}/$lauf_exec3.sh"
-if [ $lauf_exec2 = "-" ] && [ ! $lauf_exec3 = "" ]; then
+if [ ${lauf_exec2:=unset} = "-" ] && [ ! ${lauf_exec3:=unset} = "unset" ]; then
     chmod a-x "${_plugin}"
     lauf_notify "Plugin Deactivated:" "${_plugin}"
     return
-elif [ $lauf_exec2 = "+" ] && [ ! $lauf_exec3 = "" ]; then
+elif [ ${lauf_exec2:=unset} = "+" ] && [ ! ${lauf_exec3:=unset} = "unset" ]; then
     chmod a+x "${_plugin}"
     lauf_notify "Plugin Activated:" "${_plugin}"
     return
-elif [ $lauf_exec2 = "--" ]; then
+elif [ ${lauf_exec2:=unset} = "--" ]; then
     cd $lauf_plugin_dir
     chmod a-x *.*
     lauf_notify "Plugin Deactivated:" "All plugins"
     return
-elif [ $lauf_exec2 = "++" ]; then
+elif [ ${lauf_exec2:=unset} = "++" ]; then
     cd $lauf_plugin_dir
     chmod a+x *.*
     lauf_notify "Plugin Activated:" "All plugins"

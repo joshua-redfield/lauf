@@ -2,7 +2,7 @@
 # Lauf.Help                                            #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
 ########################################################
-if [ $lauf_exec2 = "with" ]; then
+if [ ${lauf_exec2:=unset} = "with" ]; then
     manual=$lauf_exec3
     test=$(man $manual)
     if [ ! -z "$test" ]; then
