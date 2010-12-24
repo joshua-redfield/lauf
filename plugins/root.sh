@@ -10,7 +10,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    _sudo=$lauf_exec2
    ${_sudo_command} ${_sudo}
    return

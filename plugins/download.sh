@@ -11,7 +11,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
     save_location=$HOME
     _download=$lauf_exec2
     wget -O "${save_location}" "${__download}" 2>&1 | sed -u 's/.* \([0-9]\+%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Speed: \2\/s, ETA: \3/' | zenity --progress --title="Downloading" --window-icon=${lauf_app_icon} --width=${lauf_width} --auto-close --auto-kill

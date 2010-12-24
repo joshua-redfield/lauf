@@ -8,7 +8,7 @@
 # Dependencies:                                        #
 # xkill, killall #######################################
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    killall $lauf_exec2
    return
 fi

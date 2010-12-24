@@ -30,7 +30,7 @@ weather () {
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
     weather_zipcode=$lauf_exec2
     weather
    return

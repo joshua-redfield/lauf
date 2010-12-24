@@ -36,12 +36,8 @@ _prog() {
 # look in <dir> for <file>                             #
 # look for <file>                                      #
 ########################################################
-echo le1 $lauf_exec1
-echo le2 $lauf_exec2
-echo le3 $lauf_exec3
-echo le4 $lauf_exec4
-if [ $lauf_exec2 = "for" ]; then
-    if [ $lauf_exec3 = "program" ];then
+if [ ${lauf_exec2:=unset} = "for" ]; then
+    if [ ${lauf_exec3:=unset} = "program" ];then
         search="$lauf_exec4"
         echo $lauf_exec4
         search_dir="application directories"
@@ -53,13 +49,13 @@ if [ $lauf_exec2 = "for" ]; then
     cd "/"
     _find
     return
-elif [ $lauf_exec2 = "program" ];then
+elif [ ${lauf_exec2:=unset} = "program" ];then
     search="$lauf_exec3"
     echo $lauf_exec3
     search_dir="application directories"
     _prog
     return
-elif [ $lauf_exec2 = "in" ]; then
+elif [ ${lauf_exec2:=unset} = "in" ]; then
     search="$lauf_exec5"
     search_dir="$lauf_exec3"
     cd "$lauf_exec3"

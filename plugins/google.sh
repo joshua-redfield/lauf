@@ -22,7 +22,7 @@ _google() {
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    google_search=${lauf_exec#"google "}
    _google
    return
