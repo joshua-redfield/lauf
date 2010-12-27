@@ -12,7 +12,7 @@ _calc() {
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    get_math=$lauf_exec2
    _calc
    return
@@ -27,6 +27,6 @@ case $? in
         return
         ;;
     1)
-        exec $0
+        lauf_cancel
 esac
 return

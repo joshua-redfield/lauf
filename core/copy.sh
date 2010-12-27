@@ -5,7 +5,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ] && [ $lauf_exec3 = "to" ] && [ ! $lauf_exec4 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ] && [ ${lauf_exec3:=unset} = "to" ] && [ ! ${lauf_exec4:=unset} = "unset" ]; then
    cp "$lauf_exec2" "$lauf_exec4"
    lauf_notify "Copying file:" "$lauf_exec2 to $lauf_exec4"
    return
@@ -23,6 +23,6 @@ case $? in
         return
         ;;
     1)
-        exec $0
+        lauf_cancel
 esac
 return

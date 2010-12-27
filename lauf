@@ -6,13 +6,21 @@
 # Dependencies: Coreutils, Zenity, Notify-OSD          #
 ########################################################
 ########################################################
+#   One Instance                                   #
+########################################################
+LAUF_LOCK='/tmp/LAUF_LOCK.txt'
+if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}); then
+    exit
+fi
+echo $$ > ${LAUF_LOCK}
+########################################################
 #   Global Variables                                   #
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="0.4.5" #Application Version
+readonly lauf_version="0.5.0" #Application Version
 readonly lauf_app_name="Lauf v${lauf_version}" #Application Name
-readonly lauf_app_motto="A lightweight application and task launcher - 'wait why does this code work'" #Application motto
+readonly lauf_app_motto="A lightweight application and task launcher'" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
 readonly lauf_plugin_dir="${lauf_app_dir}/plugins" #Plugin Directory
 . "${lauf_app_dir}/lauf.cfg" #Read user-editable variables
@@ -44,6 +52,10 @@ else #Else default to notify-send
     _timeout=$(($lauf_notify_timeout*60)) #Convert seconds to milaseconds
     notify-send --icon="${lauf_app_icon}" "$1" "$2" --expire-time=$_timeout
 fi
+}
+lauf_cancel() { #Allows plugins to play nice with running only one instance
+    rm -f ${LAUF_LOCK}
+    exec $0
 }
 ########################################################
 #   Command Line Options                               #
@@ -125,8 +137,7 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
             lauf_notify "Running Application:" "$lauf_exec_try"
             exec $lauf_exec_try
         else
-
-            exec $0  #Re-Execute application
+            lauf_cancel  #Re-Execute application
         fi
     fi
 ;;
@@ -137,3 +148,4 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
 exit
 ;;
 esac
+rm -f ${LOCKFILE}

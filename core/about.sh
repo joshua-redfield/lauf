@@ -38,7 +38,9 @@ message="$lauf_app_name
 ${lauf_app_motto}
 (c) 2010 Joshua Redfield
 (c) 2010 Hunterm
+
 https://github.com/joshua-redfield/lauf
+
 Amount of plugins: $total_plugins
 Total lines of code: $line_count"
 

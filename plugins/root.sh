@@ -1,7 +1,6 @@
 ########################################################
 # root v0.3.0                                          #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
-# (c) 2010 hunterm.haxxr@gmail.com                     #
+# (c) 2010 joshua.redfield(AT)gmail.com  & hunterm.haxxr@gmail.com                     #
 # Summary:                                             #
 # Run something as root ################################
 # Usage:                                               #
@@ -11,7 +10,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    _sudo=$lauf_exec2
    ${_sudo_command} ${_sudo}
    return
@@ -25,5 +24,5 @@ case $? in
         ${sudo_command} ${_sudo}
         return;;
     1)
-        exec $0;;
+        lauf_cancel;;
 esac

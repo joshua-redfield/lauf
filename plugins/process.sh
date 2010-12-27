@@ -33,7 +33,7 @@ case $? in
     killall ${test}
 ;;
 "1")
-    exec $0
+    lauf_cancel
 ;;
 esac
 

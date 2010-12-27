@@ -11,11 +11,11 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
     save_location=$HOME
     _download=$lauf_exec2
     wget -O "${save_location}" "${__download}" 2>&1 | sed -u 's/.* \([0-9]\+%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Speed: \2\/s, ETA: \3/' | zenity --progress --title="Downloading" --window-icon=${lauf_app_icon} --width=${lauf_width} --auto-close --auto-kill
-    notify-send "${lauf_app_name} - Download" "${download} Complete!" -i "${lauf_app_icon}"
+    lauf_notify "Download" "${download} Complete!"
     return
 fi
 ########################################################
@@ -27,8 +27,8 @@ case $? in
     cd $HOME
     save_location=$(zenity --file-selection --save --window-icon="${lauf_app_icon}" --title="${lauf_app_name} - Where do you want to save the download?" $icon)
     wget -O "${save_location}" "${__download}" 2>&1 | sed -u 's/.* \([0-9]\+%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Speed: \2\/s, ETA: \3/' | zenity --progress --title="Downloading" --window-icon=${lauf_app_icon} --width=${lauf_width} --auto-close --auto-kill
-    notify-send "${lauf_app_name} - Download" "${download} Complete!" -i "${lauf_app_icon}"
+    lauf_notify "Download" "${download} Complete!"
 ;;
 1)
-exec $0
+lauf_cancel
 esac

@@ -12,23 +12,23 @@
 #############
 
 _find() {
-        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}..." -i "${lauf_app_icon}"
+        lauf_notify "${lauf_app_name}" "Looking in ${search_dir} for ${search}..."
         find . -name "*${search}*" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy" --column "Results for $search"
         if [ $? = "0" ]; then
             return
         else
-            exec $0
+            lauf_cancel
         fi
 }
 _prog() {
-        notify-send "${lauf_app_name}" "Looking in ${search_dir} for ${search}..." -i "${lauf_app_icon}"
+        lauf_notify "${lauf_app_name}" "Looking in ${search_dir} for ${search}..."
         LOOKIN=$(echo $PATH | tr ':' ' ')
         launch=$(find $LOOKIN | grep "${search}" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy.\nYou can also select a program and then press OK to launch it." --column "Results for $search")
         if [ $? = "0" ]; then
             eval "${launch}"
             return
         else
-            exec $0
+            lauf_cancel
         fi
 }
 ########################################################
@@ -36,12 +36,8 @@ _prog() {
 # look in <dir> for <file>                             #
 # look for <file>                                      #
 ########################################################
-echo le1 $lauf_exec1
-echo le2 $lauf_exec2
-echo le3 $lauf_exec3
-echo le4 $lauf_exec4
-if [ $lauf_exec2 = "for" ]; then
-    if [ $lauf_exec3 = "program" ];then
+if [ ${lauf_exec2:=unset} = "for" ]; then
+    if [ ${lauf_exec3:=unset} = "program" ];then
         search="$lauf_exec4"
         echo $lauf_exec4
         search_dir="application directories"
@@ -53,13 +49,13 @@ if [ $lauf_exec2 = "for" ]; then
     cd "/"
     _find
     return
-elif [ $lauf_exec2 = "program" ];then
+elif [ ${lauf_exec2:=unset} = "program" ];then
     search="$lauf_exec3"
     echo $lauf_exec3
     search_dir="application directories"
     _prog
     return
-elif [ $lauf_exec2 = "in" ]; then
+elif [ ${lauf_exec2:=unset} = "in" ]; then
     search="$lauf_exec5"
     search_dir="$lauf_exec3"
     cd "$lauf_exec3"
@@ -87,7 +83,7 @@ case $? in
         fi
     ;;
     1)
-        exec $0
+        lauf_cancel
     ;;
     *)
         return

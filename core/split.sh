@@ -18,7 +18,7 @@ _split() {
 # Arguements for skipping GUI                          #
 # split file into amount                               #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    cd $HOME
    file="$lauf_exec2"
    _split
@@ -35,5 +35,5 @@ case $? in
         return
         ;;
     *)
-        exec $0
+        lauf_cancel
 esac

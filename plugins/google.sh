@@ -16,13 +16,13 @@ default_browser=$(gconftool-2 --get '/desktop/gnome/url-handlers/http/command' |
 google='http://google.com/#q='
 
 _google() {
-   notify-send "${lauf_app_name} - Google" "Searching for: $google_search" -i "${lauf_app_icon}"
-   $default_browser $google"${_search}"
+   lauf_notify "${lauf_app_name} - Google" "Searching for: $google_search"
+   $default_browser $google"${google_search}"
 }
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    google_search=${lauf_exec#"google "}
    _google
    return
@@ -36,5 +36,5 @@ case $? in
         _google
         return;;
     1)
-        exec $0;;
+        lauf_cancel;;
 esac

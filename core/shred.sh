@@ -5,7 +5,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    for arg in $lauf_exec
    do
         if [ ! $arg = $lauf_exec1 ]; then
@@ -27,6 +27,6 @@ case $? in
         return
         ;;
     1)
-        exec $0
+        lauf_cancel
 esac
 return

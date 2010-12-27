@@ -1,7 +1,6 @@
 ########################################################
 # Close v0.2.0                                         #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
-# (c) 2010 hunterm.haxxr@gmail.com                     #
+# (c) 2010 joshua.redfield(AT)gmail.com &  hunterm.haxxr@gmail.com                     #
 # Summary:                                             #
 # Allows forcing an application window to close ########
 # Usage:                                               #
@@ -9,9 +8,9 @@
 # Dependencies:                                        #
 # xkill, killall #######################################
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    killall $lauf_exec2
    return
 fi
-notify-send "${lauf_app_name} - Close" "Click an application window to kill, to cancel, right click anything" -i "${lauf_app_icon}"
+lauf_notify "Close an application" "Click an application window to kill, to cancel, right click anything"
 exec xkill
