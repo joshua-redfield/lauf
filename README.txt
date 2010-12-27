@@ -81,9 +81,7 @@ c. Help with command line options
 
 2e. Configuration
 There's various options and settings that you can change without having to modify Lauf's program files.
-You can edit the configuration by either running the configure plugin in Lauf by typing 'configure' at
-lauf's box, or by editing the lauf.cfg file directly. It's commented well enough that there should be
-no need to go into detail.
+You can edit  lauf.cfg file directly. It's commented well enough that there should be no need to go into detail.
 
 3.) Keyboard Shortcut
 a. Head over to System > Preferences > Keyboard Shortcuts.
