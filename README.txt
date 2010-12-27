@@ -48,7 +48,6 @@ g. copy
 h. split
    split <file_name>
 i. about
-j. configure
 
 2b. Built-in plugins
 a. Run command with output:
