@@ -35,5 +35,5 @@ case $? in
         return
         ;;
     *)
-        exec $0
+        lauf_cancel
 esac

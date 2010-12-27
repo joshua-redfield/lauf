@@ -30,5 +30,5 @@ case $? in
     lauf_notify "Download" "${download} Complete!"
 ;;
 1)
-exec $0
+lauf_cancel
 esac

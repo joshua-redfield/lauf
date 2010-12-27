@@ -24,5 +24,5 @@ case $? in
         ${sudo_command} ${_sudo}
         return;;
     1)
-        exec $0;;
+        lauf_cancel;;
 esac

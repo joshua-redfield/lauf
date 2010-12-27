@@ -10,10 +10,10 @@
 ########################################################
 if [ "$tweet_user" = "" ]; then
     zenity --error --text="Username has not been set in script"
-    exec $0;
+    lauf_cancel;
     elif [ "$tweet_pass" = "" ]; then
         zenity --error --text="Password has not been set in script"
-        exec $0
+        lauf_cancel
 fi
 ########################################################
 # Arguements for skipping GUI                          #
@@ -38,5 +38,5 @@ case $? in
         curl -u $tweet_user:$tweet_pass -d status="$tweet" http://twitter.com/statuses/update.xml -# -o /dev/null
         return;;
     1)
-        exec $0;;
+        lauf_cancel;;
 esac

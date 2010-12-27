@@ -17,7 +17,7 @@ _find() {
         if [ $? = "0" ]; then
             return
         else
-            exec $0
+            lauf_cancel
         fi
 }
 _prog() {
@@ -28,7 +28,7 @@ _prog() {
             eval "${launch}"
             return
         else
-            exec $0
+            lauf_cancel
         fi
 }
 ########################################################
@@ -83,7 +83,7 @@ case $? in
         fi
     ;;
     1)
-        exec $0
+        lauf_cancel
     ;;
     *)
         return

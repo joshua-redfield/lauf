@@ -38,12 +38,12 @@ fi
 ########################################################
 # GUI Code                                             #
 ########################################################
-weather_zipcode=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="Enter your 5-Digit zip code $_master?")
+weather_zipcode=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="Enter your 5-Digit zip code $_master.")
 case $? in
     0)
     weather
     ;;
     *)
-        return
+        lauf_cancel
     ;;
 esac

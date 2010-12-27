@@ -10,10 +10,10 @@
 ########################################################
 if [ "$gmail_username" = "" ]; then
     zenity --error --text="Username has not been set in lauf.cfg"
-    exec $0;
+    lauf_cancel;
     elif [ "$gmail_password" = "" ]; then
         zenity --error --text="Password has not been set in lauf.cfg"
-        exec $0
+        lauf_cancel
 fi
 gmail=$(wget -T 3 -t 1 -q --secure-protocol=TLSv1 \
  --no-check-certificate \
