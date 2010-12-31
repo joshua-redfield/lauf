@@ -1,12 +1,13 @@
 ########################################################
-# tweet v0.3.0                                         #
+# tweet v0.4.0                                         #
 # (c) 2010 joshua.redfield(AT)gmail.com                #
+# (c) 2010 hunterm.haxxr(AT)gmail.com (updated)        #
 # Summary:                                             #
 # Update twitter status ################################
 # Usage:                                               #
 # twitter, or twitter STATUS_UPDATE ####################
 # Dependencies:                                        #
-# tar, binzip2, rar, gunzip, unzip, uncompress, 7z, xz #
+# wget                                                 #
 ########################################################
 if [ "$tweet_user" = "" ]; then
     zenity --error --text="Username has not been set in script"
@@ -22,8 +23,8 @@ if [ ! $lauf_exec2 = "" ]; then
     tweet=${@#"tweet "}
     count=$(echo "$tweet" | wc -m)
     [ $count -gt 140 ] && zenity --error $lauf_app_icon --title=${lauf_app_name} --text="Your tweet was $count characters, the maximum is 140 characters!\nYour TWEET was NOT sent!" && return
+    wget -qO - --post-data="status=${tweet}" --http-user="$tweet_user" --http-password="$tweet_pass" http://api.supertweet.net/statuses/update.xml
     lauf_notify "${lauf_app_name} - Twitter" "Status changed to: ${tweet}"
-    curl -u $tweet_user:$tweet_pass -d status="$tweet" http://twitter.com/statuses/update.xml -# -o /dev/null
     return
 fi
 ########################################################
@@ -34,9 +35,10 @@ case $? in
     0)
         count=$(echo "$tweet" | wc -m)
         [ $count -gt 140 ] && zenity --error $lauf_app_icon --title=${lauf_app_name} --text="Your tweet was $count characters, the maximum is 140 characters!\nYour TWEET was NOT sent!" && exit
+        wget -qO - --post-data="status=${tweet}" --http-user="$tweet_user" --http-password="$tweet_pass" http://api.supertweet.net/statuses/update.xml
         lauf_notify "${lauf_app_name} - Twitter" "Status changed to: ${tweet}"
-        curl -u $tweet_user:$tweet_pass -d status="$tweet" http://twitter.com/statuses/update.xml -# -o /dev/null
         return;;
     1)
         lauf_cancel;;
 esac
+
