@@ -69,6 +69,10 @@ c. Lauf GUI shows up, but nothing is working?
 d. Terminal commands with '$' aren't working
    Make sure you didn't make any mistakes with using the commands arguements. 'help with COMMAND'
    Some commands do not output to the standard output, This can't be helped.
+e. Tweet.sh says that it was successful, but nothing was posted!
+   Make sure that your supertweet.net account is activated, and the 
+   tweet_user and tweet_pass reflects on the supertweet.net account 
+   settings!
 
 2d. Command Line Options
 Running Lauf with no command line options will just execute Lauf normally.
