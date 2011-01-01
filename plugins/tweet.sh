@@ -1,6 +1,6 @@
 ########################################################
 # tweet v0.4.0                                         #
-# (c) 2010 joshua.redfield(AT)gmail.com & hunterm.haxxr@gmail.com
+# (c) 2010 joshua.redfield(AT)gmail.com & hunterm.haxxr(AT)gmail.com (updated)        #
 # Summary:                                             #
 # Update twitter status ################################
 # Usage:                                               #
