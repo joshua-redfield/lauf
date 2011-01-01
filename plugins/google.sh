@@ -30,7 +30,7 @@ fi
 ########################################################
 # GUI Code                                             #
 ########################################################
-google_search=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="What are you searching google for?\nNote: You're a dumbass")
+google_search=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="What would you like to search google for?")
 case $? in
     0)
         _google
