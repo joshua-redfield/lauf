@@ -9,7 +9,7 @@
 #   One Instance                                   #
 ########################################################
 LAUF_LOCK='/tmp/LAUF_LOCK.txt'
-if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}); then
+if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}) 2>/dev/null; then
     exit
 fi
 echo $$ > ${LAUF_LOCK}
@@ -131,9 +131,9 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
         elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exists
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             lauf_notify "Running Application:" "$lauf_exec"
-            command $lauf_exec #Execute command
+            command $lauf_exec 2>/dev/null #Execute command
             if [ ! $? = "0" ]; then #If command is not sucessful, $lauf_exec_try
-                 command $lauf_exec_try
+                 command $lauf_exec_try 2>/dev/null
             fi
             exit
         else
