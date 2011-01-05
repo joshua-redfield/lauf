@@ -131,11 +131,11 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
         elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exists
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             lauf_notify "Running Application:" "$lauf_exec"
-            exec $lauf_exec #Execute command
-        elif type "$lauf_exec_try" >/dev/null; then # yay it worked when i tested it.
-            echo $lauf_exec_try > "${lauf_app_dir}/.last_command" #Last command
-            lauf_notify "Running Application:" "$lauf_exec_try"
-            exec $lauf_exec_try
+            command $lauf_exec #Execute command
+            if [ ! $? = "0" ]; then #If command is not sucessful, $lauf_exec_try
+                 command $lauf_exec_try
+            fi
+            exit
         else
             lauf_cancel  #Re-Execute application
         fi
