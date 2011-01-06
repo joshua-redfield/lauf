@@ -12,6 +12,7 @@ _split() {
         dir=$(dirname "$file")
         base=$(basename "$file")
         cd $dir
+        lauf_notify "Splitting:  $file into $split bytes"
         split --bytes=$split "$file" "$base."
 }
 ########################################################

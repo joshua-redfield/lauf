@@ -12,6 +12,7 @@
 # Arguements for skipping GUI                          #
 ########################################################
 if [ ! ${lauf_exec2:=unset} = "unset" ]; then
+   lauf_notify "Opening:" "$lauf_exec"
    for arg in $lauf_exec
    do
         if [ ! $arg = $lauf_exec1 ]; then
@@ -27,6 +28,7 @@ cd $HOME
 arg=$(zenity $lauf_app_options --file-selection --title=$lauf_app_name" - $1")
 case $? in
     0) 
+        lauf_notify "Opening:" "$arg"
         xdg-open "$arg"
         return
         ;;

@@ -6,8 +6,10 @@
 # Usage:                                               #
 # twitter, or twitter STATUS_UPDATE ####################
 # Dependencies:                                        #
-# wget                                                 #
+# wget, supertweet.net account                                                 #
 ########################################################
+tweet_user=""
+tweet_pass=""
 if [ "$tweet_user" = "" ]; then
     zenity --error --text="Username has not been set in script"
     lauf_cancel;

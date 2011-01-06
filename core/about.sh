@@ -45,3 +45,7 @@ Amount of plugins: $total_plugins
 Total lines of code: $line_count"
 
 plugin=$(echo "$message" | zenity $lauf_app_options --text-info --title="About" --width=$lauf_width --height=$(($lauf_height-150)))
+case $? in
+*)
+    lauf_cancel
+esac

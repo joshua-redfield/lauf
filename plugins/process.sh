@@ -30,6 +30,7 @@ done
 test=`eval "$com1"`
 case $? in
 "0")
+    lauf_notify "Process" "Killing program: ${test}"
     killall ${test}
 ;;
 "1")

@@ -12,5 +12,5 @@ if [ ! ${lauf_exec2:=unset} = "unset" ]; then
    killall $lauf_exec2
    return
 fi
-lauf_notify "Close an application" "Click an application window to kill, to cancel, right click anything"
+lauf_notify "Close an application" "Click an application window to kill.\n To cancel, right click anything"
 exec xkill
