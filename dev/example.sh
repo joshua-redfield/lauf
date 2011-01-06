@@ -26,6 +26,6 @@ case $? in
         return;;
     1)
         lauf_notify "Canceled" "Cancel button was pressed"
-        exec $0;;
+        lauf_cancel;;
 esac
 
