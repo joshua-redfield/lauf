@@ -34,7 +34,7 @@ line_number=$(wc -l "$lauf_core_dir/$file" | tr -d '[:alpha:]' | tr -d '[:space:
 line_count=$(($line_count+$line_number)) #Total Amount Of Lines
 done
 
-message="$lauf_app_name
+message="$lauf_app_name - Release: ${lauf_version}
 ${lauf_app_motto}
 (c) 2010 Joshua Redfield
 (c) 2010 Hunterm
