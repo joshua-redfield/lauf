@@ -10,7 +10,7 @@
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! $lauf_exec2 = "" ]; then
+if [ ! ${lauf_exec2:=unset} = "" ]; then
    $notify=$lauf_exec2
    lauf_notify "You typed:" "$lauf_exec2"
    return
