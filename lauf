@@ -1,20 +1,21 @@
 #!/bin/sh
 ########################################################
-# Lauf v0.4.5                                          #
-# (c) 2010 joshua.redfield(AT)gmail.com                #
-# (c) 2010 hunterm.haxxr(AT)gmail.com                  #
-# Dependencies: Coreutils, Zenity, Notify-OSD          #
+# Lauf
+# (c) 2010 joshua.redfield(AT)gmail.com
+# (c) 2010 hunterm.haxxr(AT)gmail.com
+# Dependencies: Coreutils, Zenity, Notify-OSD
 ########################################################
 ########################################################
-#   One Instance                                   #
+#   One Instance
 ########################################################
 LAUF_LOCK='/tmp/LAUF_LOCK.txt'
 if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}) 2>/dev/null; then
     exit
 fi
 echo $$ > ${LAUF_LOCK}
+trap "rm -f ${LAUF_LOCK}; exit" INT TERM EXIT #Trap for removing the lockfile
 ########################################################
-#   Global Variables                                   #
+#   Global Variables
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
@@ -27,7 +28,7 @@ readonly lauf_plugin_dir="${lauf_app_dir}/plugins" #Plugin Directory
 readonly lauf_app_options="--class=Lauf --name=Lauf --window-icon=$lauf_app_icon --timeout=$lauf_app_timeout"
 _master=$USER #Get users username
 ########################################################
-# Functions                                            #
+# Functions
 ########################################################
 yarra () { #yarra "variable_name" "string"
     name=$1
@@ -58,7 +59,7 @@ lauf_cancel() { #Allows plugins to play nice with running only one instance
     exec $0
 }
 ########################################################
-#   Command Line Options                               #
+#   Command Line Options
 ########################################################
 case $1 in
 "-p" | "--plugin")
@@ -94,7 +95,7 @@ case $1 in
 ;;
 esac
 ########################################################
-# Application Code                                     #
+# Application Code
 ########################################################
 lauf_exec=$(zenity $lauf_app_options --entry --width=$lauf_width --title="$lauf_app_name" --text="What do you need ${_master}?\nTip: type help if you're confused")
 case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
@@ -132,12 +133,17 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             . "${lauf_plugin_dir}/$lauf_exec1.sh" #Execute a external plugin
         elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exists
-            echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
-            lauf_notify "Running Application:" "$lauf_exec"
-            command $lauf_exec 2>/dev/null #Execute command
-            if [ ! $? = "0" ]; then #If command is not sucessful, $lauf_exec_try
-                 command $lauf_exec_try 2>/dev/null
-            fi
+            if [ $lauf_exec2 = "for" ] && [ ! ${lauf_exec3:=unset} = "unset" ]; then #Run command for a duration of time
+                lauf_notify "Running Application for $lauf_exec3" "$lauf_exec1 will be auto-killed in $lauf_exec3"
+                command timeout $lauf_exec3 $lauf_exec1
+            else
+                echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
+                lauf_notify "Running Application:" "$lauf_exec"
+                command $lauf_exec 2>/dev/null #Execute command
+                if [ ! $? = "0" ]; then #If command is not sucessful, $lauf_exec_try
+                    command $lauf_exec_try 2>/dev/null
+                fi
+             fi
             exit
         else
             lauf_cancel  #Re-Execute application
@@ -145,7 +151,7 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
     fi
 ;;
 #######################################################
-# Cancel button was pressed, exit program.            #
+# Cancel button was pressed, exit program.
 #######################################################
 1)
 exit
