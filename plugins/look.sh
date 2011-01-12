@@ -6,14 +6,14 @@
 # Usage:                                               #
 # look for FILE_NAME, or look in DIRECTORY for FILE_NAME, or look
 # Dependencies:                                        #
-# find, grep #################################################
+# find, grep, sed #################################################
 ########################################################
 # Functions #
 #############
 
 _find() {
         lauf_notify "${lauf_app_name}" "Looking in ${search_dir} for ${search}..."
-        find . -name "*${search}*" | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy" --column "Results for $search"
+        find "*${search}*" | sed 's/^.\{1\}//g' | zenity --width=${lauf_width} --height=$(($lauf_height-100)) --window-icon=$lauf_app_icon --list --editable --title  "${lauf_app_name}" --text "Results will appear as they are found\nTip: Click twice to be able to copy" --column "Results for $search"
         if [ $? = "0" ]; then
             return
         else
