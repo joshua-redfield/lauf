@@ -32,6 +32,7 @@ There are also some built-in plugins.
 2a. CORE PLUGINS
 a. help
    help with <application>
+   help with plugin <plugin_name>
 b. calc
    calc <arbitary math>
 c. plugins
@@ -56,6 +57,9 @@ b. Run bash style commands:
    #! <command>
 c. Run what ever was last entered:
    ~
+d. Run command for timed duration
+   <command_name> for <TIME>
+   Time can be: s for seconds, m for minutes, h for hours.
 
 2c. Common Issues
 a. Lauf simply blinks when I type in <blank>
@@ -69,10 +73,6 @@ c. Lauf GUI shows up, but nothing is working?
 d. Terminal commands with '$' aren't working
    Make sure you didn't make any mistakes with using the commands arguements. 'help with COMMAND'
    Some commands do not output to the standard output, This can't be helped.
-e. Tweet.sh says that it was successful, but nothing was posted!
-   Make sure that your supertweet.net account is activated, and the 
-   tweet_user and tweet_pass reflects on the supertweet.net account 
-   settings!
 
 2d. Command Line Options
 Running Lauf with no command line options will just execute Lauf normally.
@@ -85,7 +85,7 @@ c. Help with command line options
 
 2e. Configuration
 There's various options and settings that you can change without having to modify Lauf's program files.
-You can edit  lauf.cfg file directly. It's commented well enough that there should be no need to go into detail.
+You can edit  the lauf.cfg file directly. It's commented well enough that there should be no need to go into detail.
 
 3.) Keyboard Shortcut
 a. Head over to System > Preferences > Keyboard Shortcuts.
