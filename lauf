@@ -45,12 +45,12 @@ yarra () { #yarra "variable_name" "string"
 }
 lauf_notify () { #lauf_notify "Brief Message" "Full Message"
 if [ $lauf_notify_style = "notify-osd" ]; then #Use notify-send
-	_timeout=$(($lauf_notify_timeout*60)) #Convert seconds to milaseconds
+	_timeout=$(($lauf_notify_timeout*1000)) #Convert seconds to milliseconds
     notify-send --icon="${lauf_app_icon}" "$1" "$2" --expire-time=$_timeout
 elif [ $lauf_notify_style = "message" ]; then #Use Zenity messagebox
     zenity $lauf_app_options --title="$1" --text="$2" --info
 else #Else default to notify-send
-    _timeout=$(($lauf_notify_timeout*60)) #Convert seconds to milaseconds
+    _timeout=$(($lauf_notify_timeout*1000)) #Convert seconds to milliseconds
     notify-send --icon="${lauf_app_icon}" "$1" "$2" --expire-time=$_timeout
 fi
 }
