@@ -19,7 +19,7 @@ trap "rm -f ${LAUF_LOCK}; exit" INT TERM EXIT #Trap for removing the lockfile
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="2011.01.11" #Application Version
+readonly lauf_version="Dev" #Application Version
 readonly lauf_app_name="Lauf" #Application Name
 readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
@@ -133,17 +133,28 @@ case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
             echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
             . "${lauf_plugin_dir}/$lauf_exec1.sh" #Execute a external plugin
         elif type "$lauf_exec1" >/dev/null; then #Check if users input was a command, and if that application exists
-            if [ $lauf_exec2 = "for" ] && [ ! ${lauf_exec3:=unset} = "unset" ]; then #Run command for a duration of time
-                lauf_notify "Running Application for $lauf_exec3" "$lauf_exec1 will be auto-killed in $lauf_exec3"
-                command timeout $lauf_exec3 $lauf_exec1
+            test_time=${lauf_exec#*' for '}
+            test_command=${lauf_exec%' for '*}
+            for lauf_arg in $lauf_exec
+            do
+                if [ $lauf_arg = "for" ]; then
+                found_for='true'
+                break #Stop once it's found
+                fi
+            done
+            if [ ${found_for:="unset"} = "true" ]; then
+                lauf_notify "Running application:" "$test_command for duration of $test_time"
+                echo $test_command > "${lauf_app_dir}/.last_command"
+                command timeout $test_time $test_command
             else
-                echo $lauf_exec1 > "${lauf_app_dir}/.last_command" #Last command
-                lauf_notify "Running Application:" "$lauf_exec"
-                command $lauf_exec 2>/dev/null #Execute command
+                lauf_notify "Running application:" "$lauf_exec"
+                 echo $lauf_exec > "${lauf_app_dir}/.last_command"
+                command $lauf_exec 2>/dev/null
                 if [ ! $? = "0" ]; then #If command is not sucessful, $lauf_exec_try
+                    echo $lauf_exec_try > "${lauf_app_dir}/.last_command"
                     command $lauf_exec_try 2>/dev/null
                 fi
-             fi
+            fi
             exit
         else
             lauf_cancel  #Re-Execute application
