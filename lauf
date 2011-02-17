@@ -9,8 +9,10 @@
 #   One Instance
 ########################################################
 LAUF_LOCK='/tmp/LAUF_LOCK.txt'
-if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}) 2>/dev/null; then
+if [ -e ${LAUF_LOCK} ] && kill -0 $(cat ${LAUF_LOCK}) 2>/dev/null; then #Check if $LAUF_LOCK exist and if Lauf's PID is running
     exit
+else
+    rm -f ${LAUF_LOCK} #Remove $LAUF_LOCK
 fi
 echo $$ > ${LAUF_LOCK}
 trap "rm -f ${LAUF_LOCK}; exit" INT TERM EXIT #Trap for removing the lockfile
@@ -19,7 +21,7 @@ trap "rm -f ${LAUF_LOCK}; exit" INT TERM EXIT #Trap for removing the lockfile
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="2011.02.14 " #Application Version
+readonly lauf_version="Dev" #Application Version
 readonly lauf_app_name="Lauf" #Application Name
 readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory
