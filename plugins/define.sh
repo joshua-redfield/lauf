@@ -29,7 +29,7 @@ fi
 ########################################################
 # GUI Code                                             #
 ########################################################
-google_define_var=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="Enter your 5-Digit zip code $_master.")
+google_define_var=$(zenity --entry --width=${lauf_width} --window-icon=$lauf_app_icon --title="${lauf_app_name}" --text="What would you like Google to define $_master?")
 case $? in
     0)
     google_define $google_define_var
