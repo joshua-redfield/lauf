@@ -103,8 +103,8 @@ lauf_exec=$(zenity $lauf_app_options --entry --width=$lauf_width --title="$lauf_
 case $? in #Check exit code of zenity. 0 = Okay, 1 = Close
 0) #Okay
     if [ -n "${lauf_exec}" ]; then #Before doing anything, Make sure the user typed something in
-    lauf_exec1=$(echo ${lauf_exec1} | tr '[A-Z]' '[a-z]') #Convert command / plugin name to lowercase
     yarra "lauf_exec" "${lauf_exec}" #Split lauf_exec, assign a new var. lauf_exec1=command/plugin, lauf_exec2=arg1, etc.
+    lauf_exec1=$(echo ${lauf_exec1} | tr '[A-Z]' '[a-z]') #Convert command / plugin name to lowercase
         if [ $lauf_exec1 = "~" ]; then #Check if '~' was entered
             _last_command=$(cat "${lauf_app_dir}/.last_command")
             if [ -f "${lauf_core_dir}/$_last_command.sh" ]; then #Check if '~' was a core plugin
