@@ -15,7 +15,7 @@ google_define () {
 | w3m -dump -T text/html)
     define_temp=$(echo $define | awk -F'●' '{ print $2 }')
     echo $google_define_var
-     #lauf_notify "Google Define: $google_define_var" "$define_temp"
+    lauf_notify "Google Define: $google_define_var" "$define_temp"
     return
 }
 ########################################################
