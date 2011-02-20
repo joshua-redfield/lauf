@@ -6,7 +6,7 @@
 # Usage:                                               #
 # define WORD, or define
 # Dependencies:                                        #
-# curl, w3m, awk #################################################
+# curl, w3m, awk, xclip(optional) #################################################
 ########################################################
 # Functions #
 #############
@@ -15,6 +15,9 @@ google_define () {
 | w3m -dump -T text/html)
     define_temp=$(echo $define | awk -F'●' '{ print $2 }')
     lauf_notify "Google Define: $google_define_var" "$define_temp"
+    if type "xclip" >/dev/null; then
+        echo "$define_temp" | xclip -selection clipboard
+    fi
     return
 }
 ########################################################

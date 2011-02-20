@@ -6,7 +6,7 @@
 # Usage:                                               #
 #  translate LANGUAGE to LANGUAGE PHRASE or translate #
 # Dependencies:                                        #
-# curl, sed #################################################
+# curl, sed, xclip(optional) #################################################
 ########################################################
 # Functions #
 #############
@@ -14,13 +14,15 @@ google_translate () {
     translate=$(curl -s -A 'Mozilla/4.0' "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=$translate_text&langpair=${lauf_exec2}|${lauf_exec4}" | \
 sed -E -n 's/[[:alnum:]": {}]+"translatedText":"([^"]+)".*/\1/p';)
     lauf_notify "Google Translate: $translate_text_first" "$translate"
+    if type "xclip" >/dev/null; then
+        echo "$translate" | xclip -selection clipboard
+    fi
     return
 }
 ########################################################
 # Arguements for skipping GUI                          #
 ########################################################
-if [ ! ${lauf_exec2:=unset} = "unset" ] && [ ! $lauf_exec2 = "" ] && [ $lauf_exec3 = "to" ] && [ ! $lauf_exec4 = "" ] && [ ! $lauf_exec5 = "" ]; then
-   #google_define_var=${lauf_exec#"$lauf_exec1 "}
+if [ ! ${lauf_exec2:=unset} = "unset" ] && [ ! ${lauf_exec2:="unset"} = "unset" ] && [ ${lauf_exec3:="unset"} = "to" ] && [ ! ${lauf_exec4:="unset"} = "unset" ] && [ ! ${lauf_exec5:="unset"} = "unset" ]; then
    translate_text_first=${lauf_exec#"$lauf_exec1 $lauf_exec2 $lauf_exec3 $lauf_exec4 "}
    translate_text=$(echo $translate_text_first |  tr -s ' ' '+') #Change spaces into plus signs
    google_translate
