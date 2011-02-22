@@ -15,7 +15,7 @@ google_translate () {
 sed -E -n 's/[[:alnum:]": {}]+"translatedText":"([^"]+)".*/\1/p';)
     lauf_notify "Google Translate: $translate_text_first" "$translate"
     if type "xclip" >/dev/null; then
-        echo "$translate" | xclip -selection clipboard
+        echo "$translate" | tr -d '\n' | xclip -selection clipboard
     fi
     return
 }
