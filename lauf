@@ -60,10 +60,37 @@ lauf_cancel() { #Allows plugins to play nice with running only one instance
     rm -f ${LAUF_LOCK}
     exec $0
 }
+lauf_desktop_file() {
+echo "[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=Lauf
+Exec=sh $lauf_app_dir/lauf
+Icon=$lauf_app_icon
+Comment=Lauf launcher" > "$lauf_dir_temp"
+chmod +x $lauf_dir_temp
+}
 ########################################################
 #   Command Line Options
 ########################################################
 case $1 in
+"-l" | "--launcher")
+if [ ! -n "$2" ]; then
+    echo "Creating launcher in $HOME/Desktop/"
+    lauf_dir_temp="$HOME/Desktop/Lauf.desktop"
+    lauf_desktop_file
+else
+    if [ -d $2 ]; then
+    lauf_dir_temp="$2/Lauf.desktop"
+    echo "Creating launcher in $2"
+    lauf_desktop_file
+    else
+        echo "Could not create launcher. $2 is not a valid directory, Sorry."
+    fi
+fi
+exit
+;;
 "-p" | "--plugin")
     lauf_exec="$2 $3 $4 $5 $6 $7 $8 $9 $10"
     yarra "lauf_exec" "$lauf_exec" #9 total arguements from commandline
@@ -93,6 +120,7 @@ case $1 in
     echo "       -p --plugin run a lauf plugin"
     echo "       -d --debug  run lauf in debug mode"
     echo "       -h --help   show this message"
+    echo "       -l  --launcher [Directory]"
     exit
 ;;
 esac
