@@ -21,7 +21,7 @@ trap "rm -f ${LAUF_LOCK}; exit" INT TERM EXIT #Trap for removing the lockfile
 ########################################################
 readonly lauf_app_dir=$(dirname $0) #Application Directory
 readonly lauf_app_icon="${lauf_app_dir}/icons/lauf.png" #Application Icon
-readonly lauf_version="Dev" #Application Version
+readonly lauf_version="2011.03.03" #Application Version
 readonly lauf_app_name="Lauf" #Application Name
 readonly lauf_app_motto="A lightweight application and task launcher" #Application motto
 readonly lauf_core_dir="${lauf_app_dir}/core" #Core Plugin Directory

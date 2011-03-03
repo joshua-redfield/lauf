@@ -82,6 +82,8 @@ b. Debugging Lauf and Plugins
    -d --debug
 c. Help with command line options
    -h --help
+d. Creating .desktop file launcher
+   -l  --launcher [directory]
 
 2e. Configuration
 There's various options and settings that you can change without having to modify Lauf's program files.
